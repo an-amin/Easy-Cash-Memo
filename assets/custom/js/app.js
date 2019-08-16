@@ -9,22 +9,22 @@ var cash_memo_tr = function(sl=0){
                   <td class="index text-right tdSL">${sl}</td>
                   <td class="tdDescription">
                     <div class="input-group input-group-sm">
-                      <input name="item[][description]" type="text" class="form-control inputDescription" placeholder="Enter description..." required="">
+                      <input name="product_description" type="text" class="form-control inputDescription" placeholder="Enter description..." required="">
                     </div>
                   </td>
                   <td class="tdQty">
                     <div class="input-group input-group-sm">
-                      <input name="item[][qty]" type="number" class="form-control text-center inputQty" placeholder="0" value="1" step="1" min="1" required="">
+                      <input name="product_qty" type="number" class="form-control text-center inputQty" placeholder="0" value="1" step="1" min="1" required="">
                     </div>
                   </td>
                   <td class="tdRate">
                     <div class="input-group input-group-sm">
-                      <input name="item[][rate]" type="number" class="form-control text-right inputRate" placeholder="00.00" step="0.01" min="1" required="">
+                      <input name="product_rate" type="number" class="form-control text-right inputRate" placeholder="00.00" step="0.01" min="1" required="">
                     </div>
                   </td>
                   <td class=" text-right">
                     <span class="tdAmount">00.00</span>
-                    <input name="item[][amount]" type="hidden" class="inputAmount">
+                    <input name="product_amount" type="hidden" class="inputAmount">
                   </td>
                   <td class="text-center">
                     <a title="Delete this row" class="text-danger delete_row" href="javascript:void(0);"><i class="fa fa-times-circle"></i></a>
@@ -74,9 +74,76 @@ var overlay = `
 				return undefined;
 
 			openOverlay();
-			setTimeout(closeOverlay, 5000);
+			// setTimeout(closeOverlay, 5000);
 			let formData = $(this).serializeArray();
-			console.log(formData);
+
+			let memo 		= {},
+				custommer 	= {},
+				product 	= {
+					title 	:[],
+					qty 	:[],
+					rate 	:[],
+					amount  :[]
+				},
+				total		= {};
+			memo.no 		= formData[0].value; 
+			memo.date 		= formData[1].value; 
+			custommer.name 	= formData[2].value; 
+			custommer.addr 	= formData[3].value; 
+			custommer.mob 	= formData[4].value; 
+			total.amount	= formData[formData.length-2].value;
+			total.in_words 	= formData[formData.length-1].value; 
+
+			delete formData[formData.length-2];
+			delete formData[formData.length-1];
+			delete formData[4];
+			delete formData[3];
+			delete formData[2];
+			delete formData[1];
+			delete formData[0];
+
+			// console.log(formData);
+			$.each(formData, function(i,v){
+				// console.log(i,v);
+				if(v!=undefined){
+					switch(v.name)
+					{
+						case "product_description" : 
+							product.title.push(v.value); 
+							break;
+						case "product_qty" : 
+							product.qty.push(v.value); 
+							break;
+						case "product_rate" : 
+							product.rate.push(v.value); 
+							break;
+						case "product_amount" :
+							product.amount.push(v.value); 
+							break;
+					}
+				}
+			});
+
+			let memo_tbl = [],
+				allData = {};
+
+			$.each(product.title, function(i){
+				let row = {};
+					row.title = product.title[i];
+					row.qty = product.qty[i];
+					row.rate = product.rate[i];
+					row.amount = product.rate[i];
+				memo_tbl.push(row);
+			});
+
+			allData = {
+				memo		: memo,
+				customer	: custommer,
+				item_tbl 	: memo_tbl,
+				total 		: total
+			};
+			generatePrintLayout(allData);
+
 		});
 
 

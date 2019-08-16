@@ -41,7 +41,7 @@
                     <label for="memo_no" class="col-md-4 col-form-label text-left">Memo no.</label>
                     <div class="col-md-6 col-sm-12">
                       <div class="input-group">
-                        <input type="text" class="form-control" id="memo_no" placeholder="Memo no." required="">
+                        <input name="memo_no" type="text" class="form-control" id="memo_no" placeholder="Memo no." required="">
                         <div class="input-group-append">
                           <button title="Auto Generate" class="toolTip btn btn-outline-secondary" type="button" id="auto_generate_memo_no"><i class="fa fa-sync"></i></button>
                         </div>
@@ -56,7 +56,7 @@
                   <div class="form-group row">
                     <label for="memo_date" class="col-md-4 offset-md-2 col-form-label text-left text-xs-left text-sm-left">Date</label>
                     <div class="col-md-6 col-sm-12">
-                        <input type="text" class="form-control datePicker" id="memo_date" placeholder="Date" required="">
+                        <input name="memo_date" type="text" class="form-control datePicker" id="memo_date" placeholder="Date" required="">
                     </div>
                   </div>
                 </div>
@@ -67,7 +67,7 @@
                   <div class="form-group row">
                     <label for="customer_name" class="col-md-2 col-form-label text-left">Customer Name</label>
                     <div class="col-md-10">
-                      <input type="text" class="form-control" id="customer_name" placeholder="Customer Name" required="">
+                      <input name="customer_name" type="text" class="form-control" id="customer_name" placeholder="Customer Name" required="">
                     </div>
                   </div>
                 </div>
@@ -78,7 +78,7 @@
                   <div class="form-group row">
                     <label for="customer_address" class="col-md-2 col-form-label text-left">Customer Address</label>
                     <div class="col-md-10">
-                      <input type="text" class="form-control" id="customer_address" placeholder="Customer Address" required="">
+                      <input name="customer_address" type="text" class="form-control" id="customer_address" placeholder="Customer Address" required="">
                     </div>
                   </div>
                 </div>
@@ -90,7 +90,7 @@
                     <label for="customer_mobile" class="col-md-2 col-form-label text-left">Customer Mobile</label>
                     <div class="col-md-10">
                       <div class="input-group">
-                        <input type="text" class="form-control" id="customer_mobile" placeholder="Customer Mobile" required="">
+                        <input name="customer_mobile" type="text" class="form-control" id="customer_mobile" placeholder="Customer Mobile" required="" value="017">
                         <div class="input-group-append">
                           <div class="input-group-text">
                             <input title="Notify SMS" class="toolTip" type="checkbox" aria-label="Checkbox for following text input">
@@ -130,22 +130,22 @@
                   <td class="index text-right tdSL">1</td>
                   <td class="tdDescription">
                     <div class="input-group input-group-sm">
-                      <input name="item[][description]" type="text" class="form-control inputDescription" placeholder="Enter description..." required="">
+                      <input name="product_description" type="text" class="form-control inputDescription" placeholder="Enter description..." required="">
                     </div>
                   </td>
                   <td class="tdQty">
                     <div class="input-group input-group-sm">
-                      <input name="item[][qty]" type="number" class="form-control text-center inputQty" placeholder="0" value="1" step="1" min="1" required="">
+                      <input name="product_qty" type="number" class="form-control text-center inputQty" placeholder="0" value="1" step="1" min="1" required="">
                     </div>
                   </td>
                   <td class="tdRate">
                     <div class="input-group input-group-sm">
-                      <input name="item[][rate]" type="number" class="form-control text-right inputRate" placeholder="00.00" step="0.01" min="1" required="">
+                      <input name="product_rate" type="number" class="form-control text-right inputRate" placeholder="00.00" step="0.01" min="1" required="">
                     </div>
                   </td>
                   <td class=" text-right">
                     <span class="tdAmount">00.00</span>
-                    <input name="item[][amount]" type="hidden" class="inputAmount">
+                    <input name="product_amount" type="hidden" class="inputAmount">
                   </td>
                   <td class="text-center">
                     <a title="Delete this row" class="text-danger delete_row" href="javascript:void(0);"><i class="fa fa-times-circle"></i></a>
@@ -162,14 +162,14 @@
                   <td colspan="2" class="text-right"><b>Sub Total =</b></td>
                   <td id="" class="text-right">
                     <b id="subTotal">00.00</b>
-                    <input type="hidden" id="inputSubTotal">
+                    <input name="sub_total" type="hidden" id="inputSubTotal">
                   </td>
                   <td></td>
                 </tr>
                 <tr>
                   <td colspan="6">
                     <b>In words:</b>&nbsp;<i id="in_words"></i>
-                    <input type="hidden" id="inputInWords">
+                    <input name="in_words" type="hidden" id="inputInWords">
                   </td>
                 </tr>
               </tfoot>

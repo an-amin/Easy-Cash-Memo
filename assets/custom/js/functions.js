@@ -234,7 +234,7 @@ function updateAmount(This=false){
 		amount = amount ? amount.toFixed(2) : '00.00';
 
 		tr.find('.tdAmount').text(amount);
-		tr.find('.inputAmount').text(amount);
+		tr.find('.inputAmount').val(amount);
 	}
 
 	let all_tr = $('#myTable>tbody>tr'),
@@ -263,3 +263,24 @@ var UID = function () {
   // after the decimal.
   return Date.now();//Math.random().toString(36).substr(2, 6).toUpperCase();
 };
+
+
+
+
+function generatePrintLayout(data)
+{
+	// console.log('Generating Print Layout', data);
+	let printLayout = window.open(this.href,`targetWindow`, //${data.memo.no}_${data.memo.date}
+                                   `toolbar=no,
+                                    location=no,
+                                    status=no,
+                                    menubar=no,
+                                    scrollbars=yes,
+                                    resizable=yes,
+                                    top=100,
+                                    left=200,
+                                    width=550,
+                                    height=810`);
+	printLayout.document.write(`<h1>Printing memo...</h1>`);
+	setTimeout(closeOverlay, 5000);
+}
