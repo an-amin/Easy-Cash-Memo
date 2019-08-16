@@ -1,10 +1,15 @@
+const _today_	= new Date,
+	_year_	= _today_.getFullYear(),
+	_month_	= _today_.getMonth(),
+	_date_	= _today_.getDate();
+
 var cash_memo_tr = function(sl=0){
 	return `
                 <tr class="inputRow">
                   <td class="index text-right tdSL">${sl}</td>
                   <td class="tdDescription">
                     <div class="input-group input-group-sm">
-                      <input name="item[][description]" type="text" class="form-control inputDescription" placeholder="Enter description...">
+                      <input name="item[][description]" type="text" class="form-control inputDescription" placeholder="Enter description..." required="">
                     </div>
                   </td>
                   <td class="tdQty">
@@ -41,11 +46,6 @@ var overlay = `
 		// $('.toolTip').tooltip();
 		$(document).find('.toolTip').tooltip();
 
-		const _today_	= new Date,
-			_year_	= _today_.getFullYear(),
-			_month_	= _today_.getMonth(),
-			_date_	= _today_.getDate();
-
 		const releaseYear = Number($(document).find('#releaseYear').text());
 
 		if(releaseYear<_year_)
@@ -70,6 +70,9 @@ var overlay = `
 
 		$(document).on('submit', '#form', function(e){
 			e.preventDefault();
+			if(!confirm('Do you confirm?'))
+				return undefined;
+
 			openOverlay();
 			setTimeout(closeOverlay, 5000);
 			let formData = $(this).serializeArray();
@@ -89,8 +92,8 @@ var overlay = `
 
 		$('.datePicker').datepicker({
 			dateFormat 	: 'dd-mm-yy',
-			setDate		: new Date
-		}).datepicker('setDate', new Date);
+			setDate		: _today_
+		}).datepicker('setDate', _today_);
 
 		$(document).on('click', '#auto_generate_memo_no', function(){
 			$(document).find('input#memo_no').val(UID());
