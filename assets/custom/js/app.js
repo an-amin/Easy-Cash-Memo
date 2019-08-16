@@ -70,60 +70,25 @@ var overlay = `
 			setTimeout(closeOverlay, 5000);
 		});
 
-		function openOverlay(){
-			$('body').append(overlay);
-		}
-		function closeOverlay(){
-			$(document).find('#overlay').remove();
-		}
-		function sortTblIndex(){
-			let tr = $('#myTable>tbody>tr');
-			$.each(tr,function(i,v){
-				$(v).find('td:first-child').text(++i);
-			});
-		}
-
-		function updateAmount(This=false){
-			if(This)
-			{
-				let 
-					tr = $(This).closest('tr'),
-					qty = tr.find('.inputQty').val(),
-					rate = tr.find('.inputRate').val(),
-					amount = 0;
-				qty = qty ? Number(qty) : 0;
-				rate = rate ? Number(rate) : 0;
-				amount = qty*rate;
-				amount = amount ? amount.toFixed(2) : '00.00';
-				tr.find('.tdAmount').text(amount);
-
-				let in_words = String(amount),
-					in_words_splic = in_words.split('.'),
-					taka = 'taka ' + toWords(in_words_splic[0]),
-					paisa = ' & paisa ' + toWords(in_words_splic[1]) + ' only.';
-				in_words = taka+paisa;
-
-				$(document).find('#in_words').text(in_words);
-			}
-
-			let all_tr = $('#myTable>tbody>tr'),
-				sum = 0;
-			$.each(all_tr, function(i,v){
-				sum += Number($(v).find('.tdAmount').text());
-			});
-			$(document).find('#subTotal').text(sum.toFixed(2));
-			// console.log(sum);
-		}
 
 		$(document).on('keyup', '.inputQty', function(){
 			updateAmount(this);
 		});
+
 
 		$(document).on('keyup', '.inputRate', function(){
 			updateAmount(this);
 		});
 
 
+		$('.datePicker').datepicker({
+			dateFormat 	: 'dd-mm-yy',
+			setDate		: new Date
+		}).datepicker('setDate', new Date);
+
+		$(document).on('click', '#auto_generate_memo_no', function(){
+			$(document).find('input#memo_no').val(UID());
+		});
 
 	});
 })(jQuery)

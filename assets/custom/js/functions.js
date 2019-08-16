@@ -188,8 +188,6 @@
 	    return makeOrdinal(words);
 	}
 
-
-
     var numberToWords = {
         toOrdinal: toOrdinal,
         toWords: toWords,
@@ -207,3 +205,57 @@
 
 //--->number to word > end
 
+
+
+function openOverlay(){
+	$('body').append(overlay);
+}
+function closeOverlay(){
+	$(document).find('#overlay').remove();
+}
+function sortTblIndex(){
+	let tr = $('#myTable>tbody>tr');
+	$.each(tr,function(i,v){
+		$(v).find('td:first-child').text(++i);
+	});
+}
+
+function updateAmount(This=false){
+	if(This)
+	{
+		let 
+			tr = $(This).closest('tr'),
+			qty = tr.find('.inputQty').val(),
+			rate = tr.find('.inputRate').val(),
+			amount = 0;
+		qty = qty ? Number(qty) : 0;
+		rate = rate ? Number(rate) : 0;
+		amount = qty*rate;
+		amount = amount ? amount.toFixed(2) : '00.00';
+		tr.find('.tdAmount').text(amount);
+
+		let in_words = String(amount),
+			in_words_splic = in_words.split('.'),
+			taka = 'taka ' + toWords(in_words_splic[0]),
+			paisa = ' & paisa ' + toWords(in_words_splic[1]) + ' only.';
+		in_words = taka+paisa;
+
+		$(document).find('#in_words').text(in_words);
+	}
+
+	let all_tr = $('#myTable>tbody>tr'),
+		sum = 0;
+	$.each(all_tr, function(i,v){
+		sum += Number($(v).find('.tdAmount').text());
+	});
+	$(document).find('#subTotal').text(sum.toFixed(2));
+	// console.log(sum);
+}
+
+
+var UID = function () {
+  // Math.random should be unique because of its seeding algorithm.
+  // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+  // after the decimal.
+  return Math.random().toString(36).substr(2, 6).toUpperCase();
+};
