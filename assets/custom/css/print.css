@@ -1,0 +1,45 @@
+* {
+	margin 	: 0px;
+	padding : 0px;
+}
+
+body{
+	background-color : #EEE;
+}
+
+#wrapper{
+	background-color:#FFF;
+	width:142mm; 
+	height:228mm; 
+	/*padding:50px;*/
+	border:1px solid #CCC; 
+	margin:0px auto;
+}
+
+#inner_wrapper{
+	width:118mm;
+	height:159mm;
+	margin-top:51mm;
+	margin-left:12mm;
+	margin-right:11mm;
+	border:1px solid #000; 
+}
+
+#memo_no{position:relative; left:20mm; top:3.5mm; width:50mm; display:inline-block;}
+#memo_date{position:relative; left:28mm; top:2.5mm; }
+#customer_name{position:relative; left:20mm; top:6.5mm;}
+#customer_address{position:absolute; left:35mm; top:100mm;}
+#customer_mobile{position:absolute; left:35mm; top:100mm;}
+
+#item_tbl{position:relative; top:88mm;}
+
+/*
+th{display:hidden;}
+
+#sl{width:100px;}
+#title{width:400px;}
+#qty{width:100px;}
+#rate{width:100px;}
+#amount{width:100px;}
+*/
+

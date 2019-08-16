@@ -270,17 +270,10 @@ var UID = function () {
 function generatePrintLayout(data)
 {
 	// console.log('Generating Print Layout', data);
-	let printLayout = window.open(this.href,`targetWindow`, //${data.memo.no}_${data.memo.date}
-                                   `toolbar=no,
-                                    location=no,
-                                    status=no,
-                                    menubar=no,
-                                    scrollbars=yes,
-                                    resizable=yes,
-                                    top=100,
-                                    left=200,
-                                    width=550,
-                                    height=810`);
-	printLayout.document.write(`<h1>Printing memo...</h1>`);
+	let url = encodeURI(JSON.stringify(data));
+	url = `${window.location.protocol}//${window.location.host}${window.location.pathname}print.html?data=${url}`;
+	// console.log(url); return 0;
+	var newWind = window.open(url, '_blank');
+
 	setTimeout(closeOverlay, 5000);
 }
