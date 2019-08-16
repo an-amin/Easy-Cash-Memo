@@ -232,15 +232,9 @@ function updateAmount(This=false){
 		rate = rate ? Number(rate) : 0;
 		amount = qty*rate;
 		amount = amount ? amount.toFixed(2) : '00.00';
+
 		tr.find('.tdAmount').text(amount);
-
-		let in_words = String(amount),
-			in_words_splic = in_words.split('.'),
-			taka = 'taka ' + toWords(in_words_splic[0]),
-			paisa = ' & paisa ' + toWords(in_words_splic[1]) + ' only.';
-		in_words = taka+paisa;
-
-		$(document).find('#in_words').text(in_words);
+		tr.find('.inputAmount').text(amount);
 	}
 
 	let all_tr = $('#myTable>tbody>tr'),
@@ -248,8 +242,18 @@ function updateAmount(This=false){
 	$.each(all_tr, function(i,v){
 		sum += Number($(v).find('.tdAmount').text());
 	});
+
+	let in_words = String(sum.toFixed(2)),
+		in_words_splic = in_words.split('.'),
+		taka = 'taka ' + toWords(in_words_splic[0]),
+		paisa = Number(in_words_splic[1]) ? ' & paisa ' + toWords(in_words_splic[1]) : '',
+		tail = ' only.';
+	in_words = (taka+paisa+tail).toUpperCase();
+
 	$(document).find('#subTotal').text(sum.toFixed(2));
-	// console.log(sum);
+	$(document).find('#inputSubTotal').val(sum.toFixed(2));
+	$(document).find('#in_words').text(in_words);
+	$(document).find('#inputInWords').val(in_words);
 }
 
 

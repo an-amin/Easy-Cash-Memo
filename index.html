@@ -128,20 +128,23 @@
                   <td class="index text-right tdSL">1</td>
                   <td class="tdDescription">
                     <div class="input-group input-group-sm">
-                      <input type="text" class="form-control inputDescription" placeholder="Enter description...">
+                      <input name="item[][description]" type="text" class="form-control inputDescription" placeholder="Enter description...">
                     </div>
                   </td>
                   <td class="tdQty">
                     <div class="input-group input-group-sm">
-                      <input type="number" class="form-control text-center inputQty" placeholder="0" value="1" step="1" min="1">
+                      <input name="item[][qty]" type="number" class="form-control text-center inputQty" placeholder="0" value="1" step="1" min="1" required="">
                     </div>
                   </td>
                   <td class="tdRate">
                     <div class="input-group input-group-sm">
-                      <input type="number" class="form-control text-right inputRate" placeholder="00.00" step="0.01" min="1">
+                      <input name="item[][rate]" type="number" class="form-control text-right inputRate" placeholder="00.00" step="0.01" min="1" required="">
                     </div>
                   </td>
-                  <td class="tdAmount text-right">00.00</td>
+                  <td class=" text-right">
+                    <span class="tdAmount">00.00</span>
+                    <input name="item[][amount]" type="hidden" class="inputAmount">
+                  </td>
                   <td class="text-center">
                     <a title="Delete this row" class="text-danger delete_row" href="javascript:void(0);"><i class="fa fa-times-circle"></i></a>
                   </td>
@@ -155,11 +158,17 @@
                     </button>
                   </td>
                   <td colspan="2" class="text-right"><b>Sub Total =</b></td>
-                  <td id="" class="text-right"><b id="subTotal">00.00</b></td>
+                  <td id="" class="text-right">
+                    <b id="subTotal">00.00</b>
+                    <input type="hidden" id="inputSubTotal">
+                  </td>
                   <td></td>
                 </tr>
                 <tr>
-                  <td colspan="6"><b>In words:</b>&nbsp;<i id="in_words"></i></td>
+                  <td colspan="6">
+                    <b>In words:</b>&nbsp;<i id="in_words"></i>
+                    <input type="hidden" id="inputInWords">
+                  </td>
                 </tr>
               </tfoot>
             </table>
@@ -172,6 +181,10 @@
 
         <div class="card mt-1 mb-3">
           <div class="card-body text-center">
+            <a href="" id="" class="btn btn-secondary float-left">
+              <i class="fa fa-sync"></i>&nbsp;<span>Refresh</span>
+            </a>
+
             <button type="submit" id="" class="btn btn-primary float-right">
               <i class="fa fa-print"></i>&nbsp;<span>Generate Memo</span>
             </button>
